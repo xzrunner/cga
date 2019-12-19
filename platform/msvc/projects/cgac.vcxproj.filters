@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\cgac\Tokenizer.h">
+      <Filter>lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\Parser.h">
+      <Filter>parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\AST.h">
+      <Filter>parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\Expression.h">
+      <Filter>parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\token_cfg.h">
+      <Filter>lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\StringPool.h">
+      <Filter>lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\Token.h">
+      <Filter>lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\keyword.h">
+      <Filter>lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\op_cfg.h">
+      <Filter>parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\Type.h">
+      <Filter>parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\token_op_cfg.h">
+      <Filter>parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\Statement.h">
+      <Filter>parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\grammer.h" />
+    <ClInclude Include="..\..\..\include\cgac\DumpAST.h">
+      <Filter>parser</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="lexer">
+      <UniqueIdentifier>{cebd0f45-a5bb-4d0e-8a6d-245f608a60cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser">
+      <UniqueIdentifier>{b554b21a-226a-4249-8c34-897115723e96}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\Tokenizer.cpp">
+      <Filter>lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Parser.cpp">
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\AST.cpp">
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Expression.cpp">
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\StringPool.cpp">
+      <Filter>lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Type.cpp">
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Statement.cpp">
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\DumpAST.cpp">
+      <Filter>parser</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
