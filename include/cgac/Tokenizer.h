@@ -30,6 +30,8 @@ protected:
     virtual Token EmitToken() override;
 
 private:
+    void DiscardWhite();
+
     void InitScanners();
 
     TokenType ScanIdentifier();

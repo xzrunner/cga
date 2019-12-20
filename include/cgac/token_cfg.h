@@ -47,4 +47,5 @@ TOKEN(TK_LBRACE,        "{")
 TOKEN(TK_RBRACE,        "}")
 TOKEN(TK_NEWLINE,       "\n")
 
+TOKEN(TK_COMMENTS,      "#")
 TOKEN(TK_END,           "EOF")

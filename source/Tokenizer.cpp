@@ -30,7 +30,7 @@ Tokenizer::PeekToken()
 lexer::Tokenizer<TokenType>::Token
 Tokenizer::EmitToken()
 {
-    DiscardWhile(Whitespace());
+    DiscardWhite();
 
     size_t start_line = Line();
     size_t start_column = Column();
@@ -45,6 +45,13 @@ Tokenizer::EmitToken()
         const char* end_pos = CurPos();
         return Token(token, begin_pos, end_pos, Offset(begin_pos), start_line, start_column);
     }
+}
+
+void Tokenizer::DiscardWhite()
+{
+    DiscardWhile(Whitespace());
+    DiscardComments('#');
+    DiscardWhile(Whitespace());
 }
 
 void Tokenizer::InitScanners()
