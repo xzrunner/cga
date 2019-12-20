@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cgac/AST.h"
-#include "cgac/Expression.h"
+#include "cgac/typedef.h"
 
 namespace cgac
 {
@@ -12,8 +12,6 @@ struct StatementNode : public Node
         : Node(lexer, kind) {}
 
 }; // StatementNode
-
-using StmtNodePtr = std::shared_ptr<StatementNode>;
 
 struct SymbolStmtNode : public StatementNode
 {
@@ -63,6 +61,8 @@ struct CompoundStmtNode : public StatementNode
 //    Vector ilocals;
 
 }; // CompoundStmtNode
+
+class Parser;
 
 class StatementParser
 {

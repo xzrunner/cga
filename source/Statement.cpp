@@ -1,6 +1,7 @@
 #include "cgac/Statement.h"
 #include "cgac/Parser.h"
 #include "cgac/grammer.h"
+#include "cgac/Expression.h"
 
 namespace cgac
 {

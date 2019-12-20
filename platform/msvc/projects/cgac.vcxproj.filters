@@ -41,6 +41,7 @@
     <ClInclude Include="..\..\..\include\cgac\DumpAST.h">
       <Filter>parser</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\cgac\typedef.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="lexer">

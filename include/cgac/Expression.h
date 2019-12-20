@@ -3,6 +3,7 @@
 #include "cgac/AST.h"
 #include "cgac/Type.h"
 #include "cgac/Tokenizer.h"
+#include "cgac/typedef.h"
 
 namespace cgac
 {
@@ -15,9 +16,6 @@ enum OP
 };
 
 class Parser;
-
-struct ExpressionNode;
-using ExprNodePtr = std::shared_ptr<ExpressionNode>;
 
 struct ExpressionNode : public Node
 {

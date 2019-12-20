@@ -25,6 +25,7 @@
     <ClInclude Include="..\..\..\include\cgac\token_cfg.h" />
     <ClInclude Include="..\..\..\include\cgac\token_op_cfg.h" />
     <ClInclude Include="..\..\..\include\cgac\Type.h" />
+    <ClInclude Include="..\..\..\include\cgac\typedef.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\AST.cpp" />
