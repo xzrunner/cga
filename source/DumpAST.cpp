@@ -75,8 +75,6 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
 	case OP_DIV:
 	case OP_MOD:
     case OP_RULE:
-    case OP_NEG:
-    case OP_NOT:
 	case OP_INDEX:
         output << "(" << opname << " ";
 		pos += strlen(opname) + 2;
@@ -86,6 +84,8 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
         output << ")";
 		break;
 
+    case OP_NEG:
+    case OP_NOT:
     case OP_COMP:
     case OP_RELATIVE:
         output << "(" << opname << " ";
@@ -141,7 +141,7 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
         }
         output << s;
 	}
-	break;
+	    break;
 
 	case OP_STR:
 	{
