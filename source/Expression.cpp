@@ -228,6 +228,7 @@ ExprNodePtr ExpressionParser::ParseUnaryExpression(Parser& parser)
 	case TK_SUB:
 	case TK_NOT:
 	case TK_COMP:
+    case TK_RELATIVE:
     {
         auto expr = std::make_shared<ExpressionNode>(parser.GetTokenizer(), NK_Expression);
         expr->op = UNARY_OP(parser.CurrTokenType());

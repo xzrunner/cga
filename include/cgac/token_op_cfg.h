@@ -21,4 +21,4 @@ TOKENOP(TK_MOD,           OP_MOD,           OP_NONE)
 TOKENOP(TK_RULE,          OP_RULE,          OP_NONE)
 TOKENOP(TK_NOT,           OP_NONE,          OP_NOT)
 TOKENOP(TK_COMP,          OP_NONE,          OP_COMP)
-
+TOKENOP(TK_RELATIVE,      OP_NONE,          OP_RELATIVE)

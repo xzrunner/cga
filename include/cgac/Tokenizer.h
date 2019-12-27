@@ -38,6 +38,7 @@ private:
     TokenType ScanNumericLiteral();
     TokenType ScanBadChar();
     TokenType ScanEOF();
+    TokenType ScanRelative();
     TokenType ScanStringLiteral();
     TokenType ScanADD();
     TokenType ScanMinus();

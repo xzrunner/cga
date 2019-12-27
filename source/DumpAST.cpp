@@ -87,6 +87,7 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
 		break;
 
     case OP_COMP:
+    case OP_RELATIVE:
         output << "(" << opname << " ";
         pos += strlen(opname) + 2;
         DumpExpression(output, expr->kids[0], pos);

@@ -68,6 +68,7 @@ void Tokenizer::InitScanners()
     }
 
     m_scanners[END_OF_FILE] = std::bind(&Tokenizer::ScanEOF, this);
+    m_scanners['\''] = std::bind(&Tokenizer::ScanRelative, this);
     m_scanners['"'] = std::bind(&Tokenizer::ScanStringLiteral, this);
     m_scanners['+'] = std::bind(&Tokenizer::ScanADD, this);
     m_scanners['-'] = std::bind(&Tokenizer::ScanMinus, this);
@@ -126,6 +127,12 @@ TokenType Tokenizer::ScanBadChar()
 TokenType Tokenizer::ScanEOF()
 {
     return TK_END;
+}
+
+TokenType Tokenizer::ScanRelative()
+{
+    Advance();
+    return TK_RELATIVE;
 }
 
 TokenType Tokenizer::ScanStringLiteral()
