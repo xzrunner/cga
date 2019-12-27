@@ -11,6 +11,8 @@ enum
 
     TYPE_COUNT,
 
+    ATTR,
+
     ARRAY
 };
 
