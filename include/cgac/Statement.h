@@ -13,15 +13,6 @@ struct StatementNode : public Node
 
 }; // StatementNode
 
-struct SymbolStmtNode : public StatementNode
-{
-    SymbolStmtNode(const Tokenizer& lexer, NodeKind kind)
-        : StatementNode(lexer, kind) {}
-
-    ExprNodePtr expr = nullptr;
-
-}; // SymbolStmtNode
-
 struct ExprStmtNode : public StatementNode
 {
     ExprStmtNode(const Tokenizer& lexer, NodeKind kind)
@@ -30,26 +21,6 @@ struct ExprStmtNode : public StatementNode
     ExprNodePtr expr = nullptr;
 
 }; // ExprStmtNode
-
-struct RuleStmtNode : public StatementNode
-{
-    RuleStmtNode(const Tokenizer& lexer, NodeKind kind)
-        : StatementNode(lexer, kind) {}
-
-    char* rule = nullptr;
-    StmtNodePtr stmt = nullptr;
-
-}; // RuleStmtNode
-
-struct SelectorStmtNode : public StatementNode
-{
-    SelectorStmtNode(const Tokenizer& lexer, NodeKind kind)
-        : StatementNode(lexer, kind) {}
-
-    char* selector = nullptr;
-    StmtNodePtr stmt = nullptr;
-
-}; // SelectorStmtNode
 
 struct CompoundStmtNode : public StatementNode
 {
@@ -70,10 +41,8 @@ public:
     static StmtNodePtr ParseStatement(Parser& parser);
 
 private:
-    static StmtNodePtr ParseSymbolStatement(Parser& parser);
     static StmtNodePtr ParseCompoundStatement(Parser& parser);
     static StmtNodePtr ParseExpressionStatement(Parser& parser);
-    static StmtNodePtr ParseRuleStatement(Parser& parser);
 
 }; // StatementParser
 

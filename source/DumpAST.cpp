@@ -172,10 +172,6 @@ void DumpStatement(std::ostream& output, const StmtNodePtr& stmt, int pos)
 {
     switch (stmt->kind)
     {
-    case NK_SymbolStatement:
-        DumpExpression(output, std::static_pointer_cast<SymbolStmtNode>(stmt)->expr, pos);
-        break;
-
     case NK_ExpressionStatement:
         DumpExpression(output, std::static_pointer_cast<ExprStmtNode>(stmt)->expr, pos);
         break;
@@ -198,19 +194,6 @@ void DumpStatement(std::ostream& output, const StmtNodePtr& stmt, int pos)
         output << "}";
     }
         break;
-
-    case NK_RuleStatement:
-    {
-        auto rule_stmt = std::static_pointer_cast<RuleStmtNode>(stmt);
-
-        output << "(rule " << rule_stmt->rule << ":\n";
-        LeftAlign(output, pos + 2);
-        DumpStatement(output, rule_stmt->stmt, pos + 2);
-        LeftAlign(output, pos);
-        output << "end-rule)";
-    }
-        break;
-
     }
 }
 
