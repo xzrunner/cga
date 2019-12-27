@@ -50,6 +50,7 @@ private:
     TokenType ScanRBRACE();
     TokenType ScanLPAREN();
     TokenType ScanRPAREN();
+    TokenType ScanCOMMA();
     TokenType ScanCOLON();
     TokenType ScanBar();
     TokenType ScanAmpersand();

@@ -52,10 +52,23 @@ ExpressionNode::ExpressionNode(const Tokenizer& lexer, NodeKind kind)
 /**
  *  expression:
  *      assignment-expression
+ *      expression , assignment-expression
  */
 ExprNodePtr ExpressionParser::ParseExpression(Parser& parser)
 {
-    return ParseAssignmentExpression(parser);
+    auto expr = ParseAssignmentExpression(parser);
+    while (parser.CurrTokenType() == TK_COMMA)
+    {
+        auto coma_expr = std::make_shared<ExpressionNode>(parser.GetTokenizer(), NK_Expression);
+        coma_expr->op = OP_COMMA;
+        coma_expr->kids[0] = expr;
+        parser.NextToken();
+        coma_expr->kids[1] = ParseAssignmentExpression(parser);
+
+        expr = coma_expr;
+    }
+
+    return expr;
 }
 
 /**
