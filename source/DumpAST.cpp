@@ -88,6 +88,7 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
     case OP_NOT:
     case OP_COMP:
     case OP_RELATIVE:
+    case OP_DUPLICATE:
         output << "(" << opname << " ";
         pos += strlen(opname) + 2;
         DumpExpression(output, expr->kids[0], pos);
@@ -122,10 +123,6 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
         output << (char*)(expr->val.p);
 		break;
 
-    case OP_DUPLICATE:
-        assert(0);
-        break;
-
 	case OP_ID:
         output << (char*)(expr->val.p);
 		break;
@@ -142,6 +139,12 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
         output << s;
 	}
 	    break;
+
+    case OP_ATTR:
+    {
+        output << "attr ";
+    }
+    break;
 
 	case OP_STR:
 	{
@@ -193,6 +196,10 @@ void DumpStatement(std::ostream& output, const StmtNodePtr& stmt, int pos)
         }
         LeftAlign(output, pos);
         output << "}";
+
+        if (std::static_pointer_cast<CompoundStmtNode>(stmt)->duplicate) {
+            output << "*";
+        }
     }
         break;
     }

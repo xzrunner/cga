@@ -23,6 +23,8 @@ StmtNodePtr StatementParser::ParseStatement(Parser& parser)
 /**
  *  compound-statement:
  *		{ [statement-list] }
+ *  duplicate-statement:
+ *		{ [statement-list] }*
  *  statement-list:
  *		statement
  *		statement-list statement
@@ -46,6 +48,11 @@ StmtNodePtr StatementParser::ParseCompoundStatement(Parser& parser)
 	}
 	parser.Expect(TK_RBRACE);
     parser.NextToken();
+
+    if (parser.CurrTokenType() == TK_MUL) {
+        comp_stmt->duplicate = true;
+        parser.NextToken();
+    }    
 
     ASTHelper::PostCheckTypedef();
 //	Level--;

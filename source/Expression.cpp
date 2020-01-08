@@ -105,6 +105,7 @@ ExprNodePtr ExpressionParser::ParseAssignmentExpression(Parser& parser)
  *		constant
  *		string-literal
  *		( expression )
+ *		{ expression }
  */
 ExprNodePtr ExpressionParser::ParsePrimaryExpression(Parser& parser)
 {
@@ -163,6 +164,16 @@ ExprNodePtr ExpressionParser::ParsePrimaryExpression(Parser& parser)
         return expr;
     }
 
+    case TK_LBRACE:
+    {
+        parser.NextToken();
+        auto expr = ParseExpression(parser);
+        parser.Expect(TK_RBRACE);
+        parser.NextToken();
+
+        return expr;
+    }
+
 	default:
     {
         assert(0);
@@ -180,6 +191,7 @@ ExprNodePtr ExpressionParser::ParsePrimaryExpression(Parser& parser)
  *		postfix-expression --> expression
  *		postfix-expression | selector expression
  *		postfix-expression : expression
+ *		postfix-expression *
 */
 ExprNodePtr ExpressionParser::ParsePostfixExpression(Parser& parser)
 {
@@ -228,6 +240,17 @@ ExprNodePtr ExpressionParser::ParsePostfixExpression(Parser& parser)
         }
 			break;
 
+        case TK_MUL:
+        {
+            auto p = std::make_shared<ExpressionNode>(parser.GetTokenizer(), NK_Expression);
+            p->op = OP_DUPLICATE;
+            p->kids[0] = expr;
+            parser.NextToken();
+
+            expr = p;
+        }
+            break;
+
 		default:
 			return expr;
 		}
@@ -247,8 +270,6 @@ ExprNodePtr ExpressionParser::ParseUnaryExpression(Parser& parser)
 {
 	switch (parser.CurrTokenType())
 	{
-	case TK_MUL:
-	case TK_ADD:
 	case TK_SUB:
 	case TK_NOT:
 	case TK_COMP:
@@ -256,6 +277,7 @@ ExprNodePtr ExpressionParser::ParseUnaryExpression(Parser& parser)
     {
         auto expr = std::make_shared<ExpressionNode>(parser.GetTokenizer(), NK_Expression);
         expr->op = UNARY_OP(parser.CurrTokenType());
+        assert(expr->op != OP_NONE);
         parser.NextToken();
         expr->kids[0] = ParseUnaryExpression(parser);
 

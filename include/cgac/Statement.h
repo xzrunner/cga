@@ -31,6 +31,8 @@ struct CompoundStmtNode : public StatementNode
     NodePtr stmts = nullptr;
 //    Vector ilocals;
 
+    bool duplicate = false;
+
 }; // CompoundStmtNode
 
 class Parser;
