@@ -51,6 +51,7 @@ private:
     TokenType ScanLPAREN();
     TokenType ScanRPAREN();
     TokenType ScanCOMMA();
+    TokenType ScanCOMP();
     TokenType ScanCOLON();
     TokenType ScanBar();
     TokenType ScanAmpersand();

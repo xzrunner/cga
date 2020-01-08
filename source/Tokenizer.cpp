@@ -81,6 +81,7 @@ void Tokenizer::InitScanners()
     m_scanners['('] = std::bind(&Tokenizer::ScanLPAREN, this);
     m_scanners[')'] = std::bind(&Tokenizer::ScanRPAREN, this);
     m_scanners[','] = std::bind(&Tokenizer::ScanCOMMA, this);
+    m_scanners['~'] = std::bind(&Tokenizer::ScanCOMP, this);
     m_scanners[':'] = std::bind(&Tokenizer::ScanCOLON, this);
     m_scanners['|'] = std::bind(&Tokenizer::ScanBar, this);
     m_scanners['&'] = std::bind(&Tokenizer::ScanAmpersand, this);
@@ -207,6 +208,7 @@ SINGLE_CHAR_SCANNER(RBRACE)
 SINGLE_CHAR_SCANNER(LPAREN)
 SINGLE_CHAR_SCANNER(RPAREN)
 SINGLE_CHAR_SCANNER(COMMA)
+SINGLE_CHAR_SCANNER(COMP)
 SINGLE_CHAR_SCANNER(COLON)
 
 int Tokenizer::FindKeyword(const char* str, int len) const
