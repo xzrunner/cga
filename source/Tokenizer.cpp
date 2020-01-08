@@ -105,7 +105,7 @@ TokenType Tokenizer::ScanIdentifier()
 
 TokenType Tokenizer::ScanNumericLiteral()
 {
-    auto num_delim = Whitespace() + ")]}";
+    auto num_delim = Whitespace() + ")]},";
 
     auto start = CurPos();
     auto end = ReadDecimal(num_delim);
