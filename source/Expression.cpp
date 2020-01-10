@@ -251,6 +251,27 @@ ExprNodePtr ExpressionParser::ParsePostfixExpression(Parser& parser)
         }
             break;
 
+        case TK_DOT:
+        {
+            auto p = std::make_shared<ExpressionNode>(parser.GetTokenizer(), NK_Expression);
+            p->op = OP_MEMBER;
+            p->kids[0] = expr;
+            parser.NextToken();
+            if (parser.CurrTokenType() != TK_ID)
+            {
+                assert(0);
+//				Error(&p->coord, "Expect identifier as struct or union member");
+            }
+            else
+            {
+                p->val = parser.GetTokenizer().GetTokenVal();
+                parser.NextToken();
+            }
+
+            expr = p;
+        }
+            break;
+
 		default:
 			return expr;
 		}

@@ -38,15 +38,15 @@ TOKEN(TK_RULE,          "-->")
 TOKEN(TK_NOT,           "!")
 TOKEN(TK_COMP,          "~")
 TOKEN(TK_RELATIVE,      "'")
+TOKEN(TK_DOT,           ".")
 TOKEN(TK_LPAREN,        "(")
 TOKEN(TK_RPAREN,        ")")
 TOKEN(TK_LBRACKET,      "[")
 TOKEN(TK_RBRACKET,      "]")
-
-//punctuators
 TOKEN(TK_LBRACE,        "{")
 TOKEN(TK_RBRACE,        "}")
-TOKEN(TK_NEWLINE,       "\n")
 
+//punctuators
+TOKEN(TK_NEWLINE,       "\n")
 TOKEN(TK_COMMENTS,      "#")
 TOKEN(TK_END,           "EOF")

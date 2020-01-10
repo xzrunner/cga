@@ -55,6 +55,7 @@ private:
     TokenType ScanCOLON();
     TokenType ScanBar();
     TokenType ScanAmpersand();
+    TokenType ScanDot();
 
     int FindKeyword(const char* str, int len) const;
 

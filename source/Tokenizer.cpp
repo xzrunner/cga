@@ -85,6 +85,7 @@ void Tokenizer::InitScanners()
     m_scanners[':'] = std::bind(&Tokenizer::ScanCOLON, this);
     m_scanners['|'] = std::bind(&Tokenizer::ScanBar, this);
     m_scanners['&'] = std::bind(&Tokenizer::ScanAmpersand, this);
+    m_scanners['.'] = std::bind(&Tokenizer::ScanDot, this);
 }
 
 TokenType Tokenizer::ScanIdentifier()
@@ -188,6 +189,20 @@ TokenType Tokenizer::ScanAmpersand()
     {
         assert(0);
         return TK_END;
+    }
+}
+
+TokenType Tokenizer::ScanDot()
+{
+    if (IsDigit(NextChar()))
+    {
+        assert(0);
+        return TK_END;
+    }
+    else
+    {
+        Advance();
+        return TK_DOT;
     }
 }
 
