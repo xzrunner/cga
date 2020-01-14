@@ -74,6 +74,8 @@ void Tokenizer::InitScanners()
     m_scanners['-'] = std::bind(&Tokenizer::ScanMinus, this);
     m_scanners['*'] = std::bind(&Tokenizer::ScanMUL, this);
     m_scanners['/'] = std::bind(&Tokenizer::ScanDIV, this);
+    m_scanners['<'] = std::bind(&Tokenizer::ScanLess, this);
+    m_scanners['>'] = std::bind(&Tokenizer::ScanGreat, this);
     m_scanners['='] = std::bind(&Tokenizer::ScanASSIGN, this);
     m_scanners['|'] = std::bind(&Tokenizer::ScanSEPARATOR, this);
     m_scanners['{'] = std::bind(&Tokenizer::ScanLBRACE, this);
@@ -203,6 +205,34 @@ TokenType Tokenizer::ScanDot()
     {
         Advance();
         return TK_DOT;
+    }
+}
+
+TokenType Tokenizer::ScanLess()
+{
+    Advance();
+    if (CurChar() == '=')
+    {
+        Advance();
+        return TK_LESS_EQ;
+    }
+    else
+    {
+        return TK_LESS;
+    }
+}
+
+TokenType Tokenizer::ScanGreat()
+{
+    Advance();
+    if (CurChar() == '=')
+    {
+        Advance();
+        return TK_GREAT_EQ;
+    }
+    else
+    {
+        return TK_GREAT;
     }
 }
 

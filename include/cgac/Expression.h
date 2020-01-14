@@ -39,9 +39,9 @@ class ExpressionParser
 public:
     static ExprNodePtr ParseExpression(Parser& parser);
     static ExprNodePtr ParseAssignmentExpression(Parser& parser);
+    static ExprNodePtr ParsePrimaryExpression(Parser& parser);
 
 private:
-    static ExprNodePtr ParsePrimaryExpression(Parser& parser);
     static ExprNodePtr ParsePostfixExpression(Parser& parser);
     static ExprNodePtr ParseUnaryExpression(Parser& parser);
     static ExprNodePtr ParseBinaryExpression(Parser& parser, int prec);

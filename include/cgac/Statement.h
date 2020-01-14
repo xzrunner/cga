@@ -27,13 +27,41 @@ struct CompoundStmtNode : public StatementNode
     CompoundStmtNode(const Tokenizer& lexer, NodeKind kind)
         : StatementNode(lexer, kind) {}
 
-    //NodePtr decls = nullptr;
     NodePtr stmts = nullptr;
-//    Vector ilocals;
-
-    bool duplicate = false;
 
 }; // CompoundStmtNode
+
+struct CaseStmtNode : public StatementNode
+{
+    CaseStmtNode(const Tokenizer& lexer, NodeKind kind)
+        : StatementNode(lexer, kind) {}
+
+    ExprNodePtr expr = nullptr;
+
+    NodePtr stmt = nullptr;
+
+}; // CaseStmtNode
+
+struct ElseStmtNode : public StatementNode
+{
+    ElseStmtNode(const Tokenizer& lexer, NodeKind kind)
+        : StatementNode(lexer, kind) {}
+
+    NodePtr stmt = nullptr;
+
+}; // ElseStmtNode
+
+struct RuleStmtNode : public StatementNode
+{
+    RuleStmtNode(const Tokenizer& lexer, NodeKind kind)
+        : StatementNode(lexer, kind) {}
+
+    const char* name = nullptr;
+    ExprNodePtr params = nullptr;
+
+    NodePtr stmts = nullptr;
+
+}; // RuleStmtNode
 
 class Parser;
 
@@ -43,7 +71,6 @@ public:
     static StmtNodePtr ParseStatement(Parser& parser);
 
 private:
-    static StmtNodePtr ParseCompoundStatement(Parser& parser);
     static StmtNodePtr ParseExpressionStatement(Parser& parser);
 
 }; // StatementParser

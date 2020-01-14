@@ -19,7 +19,7 @@ struct TokenOp TokenOps[] =
 #undef  TOKENOP
 };
 
-#define IsBinaryOP(tok) (tok >= TK_OR && tok <= TK_RULE)
+#define IsBinaryOP(tok) (tok >= TK_OR && tok <= TK_MOD)
 #define	BINARY_OP(tok)   TokenOps[tok - TK_ASSIGN].bop
 #define UNARY_OP(tok)    TokenOps[tok - TK_ASSIGN].uop
 
@@ -121,6 +121,19 @@ ExprNodePtr ExpressionParser::ParsePrimaryExpression(Parser& parser)
 
         return expr;
     }
+
+    case TK_CONST:
+    {
+        auto expr = std::make_shared<ExpressionNode>(parser.GetTokenizer(), NK_Expression);
+        expr->ty = std::make_unique<Type>(Types[FLOAT]);
+        expr->op = OP_CONST;
+        expr->val = parser.GetTokenizer().GetTokenVal();
+        parser.NextToken();
+
+        return expr;
+    }
+
+
 
     case TK_ID:
     {

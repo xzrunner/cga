@@ -2,44 +2,168 @@
 #include "cgac/Parser.h"
 #include "cgac/grammer.h"
 #include "cgac/Expression.h"
+#include "cgac/Expression.h"
 
 namespace cgac
 {
 
 StmtNodePtr StatementParser::ParseStatement(Parser& parser)
 {
-    return ParseCompoundStatement(parser);
-}
+    auto top_comp = std::make_shared<CompoundStmtNode>(parser.GetTokenizer(), NK_CompoundStatement);
 
-/**
- *  compound-statement:
- *		[statement-list]
- *  statement-list:
- *		statement
- *		statement-list statement
- */
-StmtNodePtr StatementParser::ParseCompoundStatement(Parser& parser)
-{
-    auto comp_stmt = std::make_shared<CompoundStmtNode>(parser.GetTokenizer(), NK_CompoundStatement);
+    std::shared_ptr<RuleStmtNode> rule_stmt = nullptr;
+    NodePtr* rule_tail = nullptr;
 
-    NodePtr* tail = &comp_stmt->stmts;
+    std::shared_ptr<CaseStmtNode> case_stmt = nullptr;
+    NodePtr* case_tail = nullptr;
+
+    std::shared_ptr<ElseStmtNode> else_stmt = nullptr;
+    NodePtr* else_tail = nullptr;
+
+    auto* top_tail = &top_comp->stmts;
     while (parser.CurrTokenType() != TK_END)
     {
-        *tail = ParseExpressionStatement(parser);
-        tail = &(*tail)->next;
+        if (parser.CurrTokenType() == TK_CASE)
+        {
+            assert(!else_stmt);
+            // flush case
+            if (case_stmt)
+            {
+                assert(rule_tail);
+                *rule_tail = case_stmt;
+                rule_tail = &(*rule_tail)->next;
+
+                case_stmt.reset();
+                case_tail = nullptr;
+            }
+
+            case_stmt = std::make_shared<CaseStmtNode>(parser.GetTokenizer(), NK_CaseStatement);
+            case_tail = &case_stmt->stmt;
+
+            parser.NextToken();
+
+            case_stmt->expr = ExpressionParser::ParsePrimaryExpression(parser);
+            parser.Expect(TK_COLON);
+            parser.NextToken();
+
+            continue;
+        }
+        else if (parser.CurrTokenType() == TK_ELSE)
+        {
+            // flush case
+            assert(case_stmt && case_tail && rule_tail);
+            *rule_tail = case_stmt;
+            rule_tail = &(*rule_tail)->next;
+            case_stmt.reset();
+            case_tail = nullptr;
+
+            else_stmt = std::make_shared<ElseStmtNode>(parser.GetTokenizer(), NK_ElseStatement);
+            else_tail = &else_stmt->stmt;
+
+            parser.NextToken();
+            parser.Expect(TK_COLON);
+            parser.NextToken();
+
+            continue;
+        }
+
+        auto expr_stat = ParseExpressionStatement(parser);
+        auto expr = std::static_pointer_cast<ExprStmtNode>(expr_stat)->expr;
+        if (expr->op == OP_CONST) {
+            continue;
+        }
+        if (parser.CurrTokenType() == TK_RULE)
+        {
+            // flush else
+            if (else_stmt)
+            {
+                assert(rule_stmt && rule_tail);
+
+                *rule_tail = else_stmt;
+                rule_tail = &(*rule_tail)->next;
+
+                else_stmt.reset();
+                else_tail = nullptr;
+            }
+
+            // flush rule
+            if (rule_stmt)
+            {
+                *top_tail = rule_stmt;
+                top_tail = &(*top_tail)->next;
+
+                rule_stmt.reset();
+            }
+            assert(!rule_stmt);
+
+            rule_stmt = std::make_shared<RuleStmtNode>(parser.GetTokenizer(), NK_RuleStatement);
+            rule_tail = &rule_stmt->stmts;
+
+            switch (expr->op)
+            {
+            case OP_ID:
+                rule_stmt->name = static_cast<const char*>(expr->val.p);
+                break;
+            case OP_CALL:
+                assert(expr->kids[0] && expr->kids[0]->op == OP_ID);
+                rule_stmt->name = static_cast<const char*>(expr->kids[0]->val.p);
+                rule_stmt->params = expr->kids[1];
+                break;
+            default:
+                assert(0);
+            }
+
+            parser.NextToken();
+        }
+        else
+        {
+            // flush rule
+            if (expr->op == OP_ASSIGN && rule_stmt)
+            {
+                *top_tail = rule_stmt;
+                top_tail = &(*top_tail)->next;
+
+                rule_stmt.reset();
+            }
+
+            if (case_stmt)
+            {
+                assert(case_tail && rule_stmt && !else_stmt);
+                *case_tail = expr_stat;
+                case_tail = &(*case_tail)->next;
+            }
+            else if (else_stmt)
+            {
+                assert(else_tail && rule_stmt && !case_stmt);
+                *else_tail = expr_stat;
+                else_tail = &(*else_tail)->next;
+            }
+            else if (rule_stmt)
+            {
+                assert(rule_tail);
+                *rule_tail = expr_stat;
+                rule_tail = &(*rule_tail)->next;
+            }
+            else
+            {
+                *top_tail = expr_stat;
+                top_tail = &(*top_tail)->next;
+            }
+        }
     }
-    parser.NextToken();
 
-    ASTHelper::PostCheckTypedef();
-    //	Level--;
+    // flush rule
+    if (rule_stmt)
+    {
+        *top_tail = rule_stmt;
+        top_tail = &(*top_tail)->next;
 
-    return comp_stmt;
+        rule_stmt.reset();
+    }
+
+    return top_comp;
 }
 
-/**
- *  expression-statement:
- *		[expression] ;
- */
 StmtNodePtr StatementParser::ParseExpressionStatement(Parser& parser)
 {
     auto expr_stmt = std::make_shared<ExprStmtNode>(parser.GetTokenizer(), NK_ExpressionStatement);

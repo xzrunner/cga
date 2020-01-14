@@ -11,7 +11,8 @@ enum NodeKind
 {
     NK_Expression,
 
-    NK_ExpressionStatement, NK_CompoundStatement,
+    NK_ExpressionStatement, NK_CompoundStatement, NK_RuleStatement,
+    NK_CaseStatement, NK_ElseStatement,
 
     NK_MaxCount,
 };
