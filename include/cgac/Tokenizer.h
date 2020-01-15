@@ -46,7 +46,7 @@ private:
     TokenType ScanDIV();
     TokenType ScanLess();
     TokenType ScanGreat();
-    TokenType ScanASSIGN();
+    TokenType ScanEqual();
     TokenType ScanSEPARATOR();
     TokenType ScanLBRACE();
     TokenType ScanRBRACE();

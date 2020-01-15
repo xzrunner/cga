@@ -76,7 +76,7 @@ void Tokenizer::InitScanners()
     m_scanners['/'] = std::bind(&Tokenizer::ScanDIV, this);
     m_scanners['<'] = std::bind(&Tokenizer::ScanLess, this);
     m_scanners['>'] = std::bind(&Tokenizer::ScanGreat, this);
-    m_scanners['='] = std::bind(&Tokenizer::ScanASSIGN, this);
+    m_scanners['='] = std::bind(&Tokenizer::ScanEqual, this);
     m_scanners['|'] = std::bind(&Tokenizer::ScanSEPARATOR, this);
     m_scanners['{'] = std::bind(&Tokenizer::ScanLBRACE, this);
     m_scanners['}'] = std::bind(&Tokenizer::ScanRBRACE, this);
@@ -236,6 +236,20 @@ TokenType Tokenizer::ScanGreat()
     }
 }
 
+TokenType Tokenizer::ScanEqual()
+{
+    Advance();
+    if (CurChar() == '=')
+    {
+        Advance();
+        return TK_EQUAL;
+    }
+    else
+    {
+        return TK_ASSIGN;
+    }
+}
+
 #define SINGLE_CHAR_SCANNER(t) \
 TokenType Tokenizer::Scan##t() \
 {                              \
@@ -246,7 +260,6 @@ TokenType Tokenizer::Scan##t() \
 SINGLE_CHAR_SCANNER(ADD)
 SINGLE_CHAR_SCANNER(MUL)
 SINGLE_CHAR_SCANNER(DIV)
-SINGLE_CHAR_SCANNER(ASSIGN)
 SINGLE_CHAR_SCANNER(SEPARATOR)
 SINGLE_CHAR_SCANNER(LBRACE)
 SINGLE_CHAR_SCANNER(RBRACE)
