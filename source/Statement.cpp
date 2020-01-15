@@ -10,6 +10,7 @@ namespace cgac
 StmtNodePtr StatementParser::ParseStatement(Parser& parser)
 {
     auto top_comp = std::make_shared<CompoundStmtNode>(parser.GetTokenizer(), NK_CompoundStatement);
+    auto* top_tail = &top_comp->stmts;
 
     std::shared_ptr<RuleStmtNode> rule_stmt = nullptr;
     NodePtr* rule_tail = nullptr;
@@ -20,10 +21,38 @@ StmtNodePtr StatementParser::ParseStatement(Parser& parser)
     std::shared_ptr<ElseStmtNode> else_stmt = nullptr;
     NodePtr* else_tail = nullptr;
 
-    auto* top_tail = &top_comp->stmts;
+    auto append_expr = [&](const StmtNodePtr& expr_stat)
+    {
+        if (case_stmt)
+        {
+            assert(case_tail && rule_stmt && !else_stmt);
+            *case_tail = expr_stat;
+            case_tail = &(*case_tail)->next;
+        }
+        else if (else_stmt)
+        {
+            assert(else_tail && rule_stmt && !case_stmt);
+            *else_tail = expr_stat;
+            else_tail = &(*else_tail)->next;
+        }
+        else if (rule_stmt)
+        {
+            assert(rule_tail);
+            *rule_tail = expr_stat;
+            rule_tail = &(*rule_tail)->next;
+        }
+        else
+        {
+            *top_tail = expr_stat;
+            top_tail = &(*top_tail)->next;
+        }
+    };
+
     while (parser.CurrTokenType() != TK_END)
     {
-        if (parser.CurrTokenType() == TK_CASE)
+        switch (parser.CurrTokenType())
+        {
+        case TK_CASE:
         {
             assert(!else_stmt);
             // flush case
@@ -38,7 +67,7 @@ StmtNodePtr StatementParser::ParseStatement(Parser& parser)
             }
 
             case_stmt = std::make_shared<CaseStmtNode>(parser.GetTokenizer(), NK_CaseStatement);
-            case_tail = &case_stmt->stmt;
+            case_tail = &case_stmt->stmts;
 
             parser.NextToken();
 
@@ -48,7 +77,9 @@ StmtNodePtr StatementParser::ParseStatement(Parser& parser)
 
             continue;
         }
-        else if (parser.CurrTokenType() == TK_ELSE)
+            break;
+
+        case TK_ELSE:
         {
             // flush case
             assert(case_stmt && case_tail && rule_tail);
@@ -58,13 +89,36 @@ StmtNodePtr StatementParser::ParseStatement(Parser& parser)
             case_tail = nullptr;
 
             else_stmt = std::make_shared<ElseStmtNode>(parser.GetTokenizer(), NK_ElseStatement);
-            else_tail = &else_stmt->stmt;
+            else_tail = &else_stmt->stmts;
 
             parser.NextToken();
             parser.Expect(TK_COLON);
             parser.NextToken();
 
             continue;
+        }
+            break;
+
+        case TK_LBRACE:
+        {
+            parser.NextToken();
+
+            auto sel_stmt = std::make_shared<SelectorStmtNode>(parser.GetTokenizer(), NK_SelectorStatement);
+            sel_stmt->expr = ExpressionParser::ParseExpression(parser);
+
+            append_expr(sel_stmt);
+
+            parser.Expect(TK_RBRACE);
+            parser.NextToken();
+
+            if (parser.CurrTokenType() == TK_MUL) {
+                sel_stmt->repeat = true;
+                parser.NextToken();
+            }
+
+            continue;
+        }
+            break;
         }
 
         auto expr_stat = ParseExpressionStatement(parser);
@@ -126,29 +180,7 @@ StmtNodePtr StatementParser::ParseStatement(Parser& parser)
                 rule_stmt.reset();
             }
 
-            if (case_stmt)
-            {
-                assert(case_tail && rule_stmt && !else_stmt);
-                *case_tail = expr_stat;
-                case_tail = &(*case_tail)->next;
-            }
-            else if (else_stmt)
-            {
-                assert(else_tail && rule_stmt && !case_stmt);
-                *else_tail = expr_stat;
-                else_tail = &(*else_tail)->next;
-            }
-            else if (rule_stmt)
-            {
-                assert(rule_tail);
-                *rule_tail = expr_stat;
-                rule_tail = &(*rule_tail)->next;
-            }
-            else
-            {
-                *top_tail = expr_stat;
-                top_tail = &(*top_tail)->next;
-            }
+            append_expr(expr_stat);
         }
     }
 

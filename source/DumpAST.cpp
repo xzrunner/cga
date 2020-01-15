@@ -250,6 +250,22 @@ void DumpStatement(std::ostream& output, const StmtNodePtr& stmt, int pos)
         output << ")";
     }
         break;
+
+    case NK_SelectorStatement:
+    {
+        auto sel_stmt = std::static_pointer_cast<SelectorStmtNode>(stmt);
+        output << "(sel ";
+        pos += 3;
+
+        DumpExpression(output, sel_stmt->expr, pos);
+
+        LeftAlign(output, pos);
+        output << ")";
+        if (sel_stmt->repeat) {
+            output << "*";
+        }
+    }
+        break;
     }
 }
 

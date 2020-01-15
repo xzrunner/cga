@@ -63,6 +63,17 @@ struct RuleStmtNode : public StatementNode
 
 }; // RuleStmtNode
 
+struct SelectorStmtNode : public StatementNode
+{
+    SelectorStmtNode(const Tokenizer& lexer, NodeKind kind)
+        : StatementNode(lexer, kind) {}
+
+    ExprNodePtr expr = nullptr;
+
+    bool repeat = false;
+
+}; // SelectorStmtNode
+
 class Parser;
 
 class StatementParser
