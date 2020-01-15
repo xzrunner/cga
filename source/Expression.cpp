@@ -256,7 +256,7 @@ ExprNodePtr ExpressionParser::ParsePostfixExpression(Parser& parser)
         case TK_MUL:
         {
             auto p = std::make_shared<ExpressionNode>(parser.GetTokenizer(), NK_Expression);
-            p->op = OP_DUPLICATE;
+            p->op = OP_REPEAT;
             p->kids[0] = expr;
             parser.NextToken();
 

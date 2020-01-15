@@ -38,7 +38,7 @@ struct CaseStmtNode : public StatementNode
 
     ExprNodePtr expr = nullptr;
 
-    NodePtr stmt = nullptr;
+    NodePtr stmts = nullptr;
 
 }; // CaseStmtNode
 
@@ -47,7 +47,7 @@ struct ElseStmtNode : public StatementNode
     ElseStmtNode(const Tokenizer& lexer, NodeKind kind)
         : StatementNode(lexer, kind) {}
 
-    NodePtr stmt = nullptr;
+    NodePtr stmts = nullptr;
 
 }; // ElseStmtNode
 

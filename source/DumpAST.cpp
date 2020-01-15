@@ -87,7 +87,7 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
     case OP_NOT:
     case OP_COMP:
     case OP_RELATIVE:
-    case OP_DUPLICATE:
+    case OP_REPEAT:
         output << "(" << opname << " ";
         pos += strlen(opname) + 2;
         DumpExpression(output, expr->kids[0], pos);
@@ -217,7 +217,7 @@ void DumpStatement(std::ostream& output, const StmtNodePtr& stmt, int pos)
         auto case_stmt = std::static_pointer_cast<CaseStmtNode>(stmt);
         output << "(case ";
         DumpExpression(output, case_stmt->expr, pos);
-        auto p = case_stmt->stmt;
+        auto p = case_stmt->stmts;
         while (p != NULL)
         {
             LeftAlign(output, pos + 2);
@@ -236,7 +236,7 @@ void DumpStatement(std::ostream& output, const StmtNodePtr& stmt, int pos)
     {
         auto else_stmt = std::static_pointer_cast<ElseStmtNode>(stmt);
         output << "(else ";
-        auto p = else_stmt->stmt;
+        auto p = else_stmt->stmts;
         while (p != NULL)
         {
             LeftAlign(output, pos + 2);
