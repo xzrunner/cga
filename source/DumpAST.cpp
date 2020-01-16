@@ -140,7 +140,7 @@ void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)
 	    break;
 
     case OP_ATTR:
-        output << "attr ";
+        //output << "attr ";
         break;
 
 	case OP_STR:
