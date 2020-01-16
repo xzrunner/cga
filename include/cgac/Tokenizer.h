@@ -45,6 +45,7 @@ private:
     TokenType ScanMinus();
     TokenType ScanMUL();
     TokenType ScanDIV();
+    TokenType ScanMOD();
     TokenType ScanLess();
     TokenType ScanGreat();
     TokenType ScanEqual();

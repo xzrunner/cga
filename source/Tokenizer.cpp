@@ -79,6 +79,7 @@ void Tokenizer::InitScanners()
     m_scanners['-'] = std::bind(&Tokenizer::ScanMinus, this);
     m_scanners['*'] = std::bind(&Tokenizer::ScanMUL, this);
     m_scanners['/'] = std::bind(&Tokenizer::ScanDIV, this);
+    m_scanners['%'] = std::bind(&Tokenizer::ScanMOD, this);
     m_scanners['<'] = std::bind(&Tokenizer::ScanLess, this);
     m_scanners['>'] = std::bind(&Tokenizer::ScanGreat, this);
     m_scanners['='] = std::bind(&Tokenizer::ScanEqual, this);
@@ -265,6 +266,7 @@ TokenType Tokenizer::Scan##t() \
 SINGLE_CHAR_SCANNER(ADD)
 SINGLE_CHAR_SCANNER(MUL)
 SINGLE_CHAR_SCANNER(DIV)
+SINGLE_CHAR_SCANNER(MOD)
 SINGLE_CHAR_SCANNER(SEPARATOR)
 SINGLE_CHAR_SCANNER(LBRACE)
 SINGLE_CHAR_SCANNER(RBRACE)
