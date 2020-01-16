@@ -184,6 +184,20 @@ StmtNodePtr StatementParser::ParseStatement(Parser& parser)
         }
     }
 
+    assert(!case_stmt);
+
+    // flush else
+    if (else_stmt)
+    {
+        assert(rule_stmt && rule_tail);
+
+        *rule_tail = else_stmt;
+        rule_tail = &(*rule_tail)->next;
+
+        else_stmt.reset();
+        else_tail = nullptr;
+    }
+
     // flush rule
     if (rule_stmt)
     {
