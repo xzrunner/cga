@@ -20,7 +20,8 @@ union Value
 class Tokenizer : public lexer::Tokenizer<unsigned int>
 {
 public:
-    Tokenizer(const char* str);
+    Tokenizer(const char* str,
+        const std::shared_ptr<StringPool>& str_pool = nullptr);
 
     virtual Token PeekToken() override;
 
@@ -74,7 +75,7 @@ private:
 
     Value m_token_val;
 
-    StringPool m_str_pool;
+    std::shared_ptr<StringPool> m_str_pool = nullptr;
 
 }; // Tokenizer
 

@@ -4,8 +4,8 @@
 namespace cgac
 {
 
-Parser::Parser(const char* str)
-    : m_tokenizer(str)
+Parser::Parser(const char* str, const std::shared_ptr<StringPool>& str_pool)
+    : m_tokenizer(str, str_pool)
 {
     m_curr_token = m_tokenizer.NextToken();
 }

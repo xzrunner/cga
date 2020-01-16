@@ -12,9 +12,14 @@ char* Tokenizer::TokenStrings[] =
 #undef  TOKEN
 };
 
-Tokenizer::Tokenizer(const char* str)
+Tokenizer::Tokenizer(const char* str, const std::shared_ptr<StringPool>& str_pool)
     : lexer::Tokenizer<TokenType>(str, str + strlen(str), "\"", '\\')
+    , m_str_pool(str_pool)
 {
+    if (!m_str_pool) {
+        m_str_pool = std::make_shared<StringPool>();
+    }
+
     InitScanners();
 }
 
@@ -100,7 +105,7 @@ TokenType Tokenizer::ScanIdentifier()
 
     int tok = FindKeyword(start, (int)(CurPos() - start));
     if (tok == TK_ID) {
-        m_token_val.p = (void*)(m_str_pool.InsertAndQuery(start, (int)(CurPos() - start)));
+        m_token_val.p = (void*)(m_str_pool->InsertAndQuery(start, (int)(CurPos() - start)));
     }
 
     return static_cast<TokenType>(tok);
@@ -145,7 +150,7 @@ TokenType Tokenizer::ScanStringLiteral()
     Advance();
     const char* start_pos = CurPos();
     const char* end_pos = ReadQuotedString();
-    m_token_val.p = (void*)(m_str_pool.InsertAndQuery(start_pos, end_pos - start_pos));
+    m_token_val.p = (void*)(m_str_pool->InsertAndQuery(start_pos, end_pos - start_pos));
 
 	return TK_STRING;
 }

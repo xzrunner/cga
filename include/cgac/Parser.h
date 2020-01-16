@@ -10,7 +10,8 @@ namespace cgac
 class Parser : public lexer::Parser<TokenType>
 {
 public:
-    Parser(const char* str);
+    Parser(const char* str,
+        const std::shared_ptr<StringPool>& str_pool = nullptr);
 
     auto& GetTokenizer() const { return m_tokenizer; }
 
