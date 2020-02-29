@@ -1,10 +1,10 @@
-#include "cgac/Statement.h"
-#include "cgac/Parser.h"
-#include "cgac/grammer.h"
-#include "cgac/Expression.h"
-#include "cgac/Expression.h"
+#include "cga/Statement.h"
+#include "cga/Parser.h"
+#include "cga/grammer.h"
+#include "cga/Expression.h"
+#include "cga/Expression.h"
 
-namespace cgac
+namespace cga
 {
 
 StmtNodePtr StatementParser::ParseStatement(Parser& parser)

@@ -1,8 +1,8 @@
-cgac/
-cgac_test/
+cga/
+cga_test/
 projects/*
 
-!projects/cgac.vcxproj
-!projects/cgac.vcxproj.filters
-!projects/cgac_test.vcxproj
-!projects/cgac_test.vcxproj.filters
+!projects/cga.vcxproj
+!projects/cga.vcxproj.filters
+!projects/cga_test.vcxproj
+!projects/cga_test.vcxproj.filters

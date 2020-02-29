@@ -11,21 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\cgac\AST.h" />
-    <ClInclude Include="..\..\..\include\cgac\DumpAST.h" />
-    <ClInclude Include="..\..\..\include\cgac\Expression.h" />
-    <ClInclude Include="..\..\..\include\cgac\grammer.h" />
-    <ClInclude Include="..\..\..\include\cgac\keyword.h" />
-    <ClInclude Include="..\..\..\include\cgac\op_cfg.h" />
-    <ClInclude Include="..\..\..\include\cgac\Parser.h" />
-    <ClInclude Include="..\..\..\include\cgac\Statement.h" />
-    <ClInclude Include="..\..\..\include\cgac\StringPool.h" />
-    <ClInclude Include="..\..\..\include\cgac\Token.h" />
-    <ClInclude Include="..\..\..\include\cgac\Tokenizer.h" />
-    <ClInclude Include="..\..\..\include\cgac\token_cfg.h" />
-    <ClInclude Include="..\..\..\include\cgac\token_op_cfg.h" />
-    <ClInclude Include="..\..\..\include\cgac\Type.h" />
-    <ClInclude Include="..\..\..\include\cgac\typedef.h" />
+    <ClInclude Include="..\..\..\include\cga\AST.h" />
+    <ClInclude Include="..\..\..\include\cga\DumpAST.h" />
+    <ClInclude Include="..\..\..\include\cga\Expression.h" />
+    <ClInclude Include="..\..\..\include\cga\grammer.h" />
+    <ClInclude Include="..\..\..\include\cga\keyword.h" />
+    <ClInclude Include="..\..\..\include\cga\op_cfg.h" />
+    <ClInclude Include="..\..\..\include\cga\Parser.h" />
+    <ClInclude Include="..\..\..\include\cga\Statement.h" />
+    <ClInclude Include="..\..\..\include\cga\StringPool.h" />
+    <ClInclude Include="..\..\..\include\cga\Token.h" />
+    <ClInclude Include="..\..\..\include\cga\Tokenizer.h" />
+    <ClInclude Include="..\..\..\include\cga\token_cfg.h" />
+    <ClInclude Include="..\..\..\include\cga\token_op_cfg.h" />
+    <ClInclude Include="..\..\..\include\cga\Type.h" />
+    <ClInclude Include="..\..\..\include\cga\typedef.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\AST.cpp" />
@@ -38,9 +38,9 @@
     <ClCompile Include="..\..\..\source\Type.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>1.cgac</ProjectName>
+    <ProjectName>0.cga</ProjectName>
     <ProjectGuid>{265A1D5A-05C2-4B2A-9EA5-DC8DE7C1AE57}</ProjectGuid>
-    <RootNamespace>cgac</RootNamespace>
+    <RootNamespace>cga</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -70,12 +70,12 @@
     <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\cgac\x86\Debug\</OutDir>
-    <IntDir>..\cgac\x86\Debug\obj\</IntDir>
+    <OutDir>..\cga\x86\Debug\</OutDir>
+    <IntDir>..\cga\x86\Debug\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\cgac\x86\Release\</OutDir>
-    <IntDir>..\cgac\x86\Release\obj\</IntDir>
+    <OutDir>..\cga\x86\Release\</OutDir>
+    <IntDir>..\cga\x86\Release\obj\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

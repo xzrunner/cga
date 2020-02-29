@@ -1,6 +1,6 @@
-#include "cgac/StringPool.h"
+#include "cga/StringPool.h"
 
-namespace cgac
+namespace cga
 {
 
 const char* StringPool::InsertAndQuery(const char* str, int len)

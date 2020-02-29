@@ -1,7 +1,7 @@
-#include "cgac/Parser.h"
-#include "cgac/AST.h"
+#include "cga/Parser.h"
+#include "cga/AST.h"
 
-namespace cgac
+namespace cga
 {
 
 Parser::Parser(const char* str, const std::shared_ptr<StringPool>& str_pool)

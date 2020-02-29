@@ -1,9 +1,9 @@
 #pragma once
 
-#include "cgac/Expression.h"
-#include "cgac/Statement.h"
+#include "cga/Expression.h"
+#include "cga/Statement.h"
 
-namespace cgac
+namespace cga
 {
 
 void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos);

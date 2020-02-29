@@ -2,7 +2,7 @@
 
 #include <memory>
 
-namespace cgac
+namespace cga
 {
 
 struct ExpressionNode;

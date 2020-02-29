@@ -1,7 +1,7 @@
-#include "cgac/AST.h"
-#include "cgac/Tokenizer.h"
+#include "cga/AST.h"
+#include "cga/Tokenizer.h"
 
-namespace cgac
+namespace cga
 {
 
 Coord::Coord(const Tokenizer& lexer)

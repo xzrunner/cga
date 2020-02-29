@@ -1,4 +1,4 @@
-#include "cgac/DumpAST.h"
+#include "cga/DumpAST.h"
 
 #include <stdarg.h>
 
@@ -39,7 +39,7 @@ std::string StringFormat(const std::string fmt, ...)
 
 }
 
-namespace cgac
+namespace cga
 {
 
 void DumpExpression(std::ostream& output, const ExprNodePtr& expr, int pos)

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace cgac
+namespace cga
 {
 
 struct keyword

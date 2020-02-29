@@ -1,9 +1,9 @@
 #pragma once
 
-#include "cgac/AST.h"
-#include "cgac/typedef.h"
+#include "cga/AST.h"
+#include "cga/typedef.h"
 
-namespace cgac
+namespace cga
 {
 
 struct StatementNode : public Node

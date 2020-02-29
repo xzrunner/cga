@@ -1,17 +1,17 @@
 #pragma once
 
-#include "cgac/AST.h"
-#include "cgac/Type.h"
-#include "cgac/Tokenizer.h"
-#include "cgac/typedef.h"
+#include "cga/AST.h"
+#include "cga/Type.h"
+#include "cga/Tokenizer.h"
+#include "cga/typedef.h"
 
-namespace cgac
+namespace cga
 {
 
 enum OP
 {
 #define OPINFO(op, prec, name, func, opcode) op,
-#include "cgac/op_cfg.h"
+#include "cga/op_cfg.h"
 #undef OPINFO
 };
 

@@ -1,47 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\cgac\Tokenizer.h">
+    <ClInclude Include="..\..\..\include\cga\Tokenizer.h">
       <Filter>lexer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\Parser.h">
+    <ClInclude Include="..\..\..\include\cga\Parser.h">
       <Filter>parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\AST.h">
+    <ClInclude Include="..\..\..\include\cga\AST.h">
       <Filter>parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\Expression.h">
+    <ClInclude Include="..\..\..\include\cga\Expression.h">
       <Filter>parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\token_cfg.h">
+    <ClInclude Include="..\..\..\include\cga\token_cfg.h">
       <Filter>lexer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\StringPool.h">
+    <ClInclude Include="..\..\..\include\cga\StringPool.h">
       <Filter>lexer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\Token.h">
+    <ClInclude Include="..\..\..\include\cga\Token.h">
       <Filter>lexer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\keyword.h">
+    <ClInclude Include="..\..\..\include\cga\keyword.h">
       <Filter>lexer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\op_cfg.h">
+    <ClInclude Include="..\..\..\include\cga\op_cfg.h">
       <Filter>parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\Type.h">
+    <ClInclude Include="..\..\..\include\cga\Type.h">
       <Filter>parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\token_op_cfg.h">
+    <ClInclude Include="..\..\..\include\cga\token_op_cfg.h">
       <Filter>parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\Statement.h">
+    <ClInclude Include="..\..\..\include\cga\Statement.h">
       <Filter>parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\grammer.h" />
-    <ClInclude Include="..\..\..\include\cgac\DumpAST.h">
+    <ClInclude Include="..\..\..\include\cga\grammer.h" />
+    <ClInclude Include="..\..\..\include\cga\DumpAST.h">
       <Filter>parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\cgac\typedef.h" />
+    <ClInclude Include="..\..\..\include\cga\typedef.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="lexer">

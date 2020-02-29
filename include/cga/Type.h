@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace cgac
+namespace cga
 {
 
 enum

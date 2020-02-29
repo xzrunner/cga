@@ -1,11 +1,11 @@
-#include "cgac/Type.h"
+#include "cga/Type.h"
 
 #include <assert.h>
 
 #define CHAR_SIZE         1
 #define FLOAT_SIZE        4
 
-namespace cgac
+namespace cga
 {
 
 Type Types[TYPE_COUNT];

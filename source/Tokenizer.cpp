@@ -1,14 +1,14 @@
-#include "cgac/Tokenizer.h"
-#include "cgac/keyword.h"
+#include "cga/Tokenizer.h"
+#include "cga/keyword.h"
 
-namespace cgac
+namespace cga
 {
 
 char* Tokenizer::TokenStrings[] =
 {
     "begin",
 #define TOKEN(k, s) s,
-#include "cgac/token_cfg.h"
+#include "cga/token_cfg.h"
 #undef  TOKEN
 };
 

@@ -1,10 +1,10 @@
-#include "cgac/Expression.h"
-#include "cgac/Parser.h"
+#include "cga/Expression.h"
+#include "cga/Parser.h"
 
 namespace
 {
 
-using namespace cgac;
+using namespace cga;
 
 struct TokenOp
 {
@@ -15,7 +15,7 @@ struct TokenOp
 struct TokenOp TokenOps[] =
 {
 #define TOKENOP(tok, bop, uop) {bop, uop},
-#include "cgac/token_op_cfg.h"
+#include "cga/token_op_cfg.h"
 #undef  TOKENOP
 };
 
@@ -26,20 +26,20 @@ struct TokenOp TokenOps[] =
 int Prec[] =
 {
 #define OPINFO(op, prec, name, func, opcode) prec,
-#include "cgac/op_cfg.h"
+#include "cga/op_cfg.h"
 	0
 #undef OPINFO
 };
 
 }
 
-namespace cgac
+namespace cga
 {
 
 char* ExpressionParser::OPNames[] =
 {
 #define OPINFO(op, prec, name, func, opcode) name,
-#include "cgac/op_cfg.h"
+#include "cga/op_cfg.h"
 	NULL
 #undef OPINFO
 };

@@ -3,7 +3,7 @@
 #include <set>
 #include <string>
 
-namespace cgac
+namespace cga
 {
 
 class StringPool

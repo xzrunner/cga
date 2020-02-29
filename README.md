@@ -1,3 +1,3 @@
-# cgac
+# cga
 
 CGA compiler.

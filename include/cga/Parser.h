@@ -1,10 +1,10 @@
 #pragma once
 
-#include "cgac/Tokenizer.h"
+#include "cga/Tokenizer.h"
 
 #include <lexer/Parser.h>
 
-namespace cgac
+namespace cga
 {
 
 class Parser : public lexer::Parser<TokenType>
@@ -34,7 +34,7 @@ private:
 private:
     typedef Tokenizer::Token Token;
 
-    cgac::Tokenizer m_tokenizer;
+    cga::Tokenizer m_tokenizer;
 
     lexer::TokenTemplate<TokenType> m_curr_token;
 

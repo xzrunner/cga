@@ -1,14 +1,14 @@
 #pragma once
 
-#include "cgac/Token.h"
-#include "cgac/StringPool.h"
+#include "cga/Token.h"
+#include "cga/StringPool.h"
 
 #include <lexer/Tokenizer.h>
 
 #include <functional>
 #include <array>
 
-namespace cgac
+namespace cga
 {
 
 union Value
